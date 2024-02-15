@@ -76,10 +76,10 @@
                                          </div>
                                          <div class="live-score flex justify-between max-w-[1100px] mx-auto">
 
-                                                  <button class="btn bg-purple-400 text-white rounded-full">
+                                                  <button class="btn bg-purple-500 text-white rounded-full">
                                                                      Life
                                                                      <img src="./images/heart.svg" alt="">
-                                                                     <span id="life">1</span>
+                                                                     <span id="life">5</span>
                                                   </button>
                                                   <button class="btn bg-purple-800 text-white rounded-full">
                                                   Score
@@ -92,6 +92,7 @@
                      <!-- score screen -->
                      <section class="score hidden text-white flex flex-col justify-center items-center min-h-screen" id="score-screen">
                               <div class="bg-gradient-to-r from-gradiantColor1 from-0% to-gradiantColor2 to-100% ... w-96 border-scoreBorder border border-solid rounded-2xl p-10 space-y-4 text-center">
+                                <h1 class="font-popins text-4xl font-bold">Game <span class="text-red-600">Over!</span></h1>
                                         <h1 class="font-popins text-6xl"><span class="font-extrabold">Score</span> <span class="font-extrabold">:</span> <span class="font-extrabold" id="main-score">0</span></h1>
                                     <button
                                          class="btn border-none bg-white text-mainBg hover:text-white font-popins font-semibold text-2xl" onclick="hideSection('score-screen');addSection('play-ground'); resetEveryThing()">Play

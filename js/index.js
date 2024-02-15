@@ -18,27 +18,28 @@ let score = 0;
 const showScore = document.getElementById('score');
 const errorTextShow = document.getElementById('error-text');
 const showLife = document.getElementById('life')
-let life = 1;
+let life = 5;
 const mainScore = document.getElementById('main-score')
 
-function hideSection(element) {
+function hideSection(element) { // dynamic add hidden class
           const home = document.getElementById(element)
           home.classList.add('hidden');
 }
 
-function addSection(element) {
+function addSection(element) { // dynamic remove hidden class
           const playGround = document.getElementById(element)
           playGround.classList.remove('hidden')
 }
 
-function startGame() {
+function startGame() { // random key generator
           const alphabet = 'abcdefghijklmnopqrstuvwxyz'
           const alphabets = alphabet.split('');
           const randomNumber = Math.floor(Math.random() * 26);
           showAlphabet.innerText = alphabets[randomNumber].toUpperCase();
+          showBg(alphabets[randomNumber])
 }
 
-function stopGame(lifeToGameOver) {
+function stopGame(lifeToGameOver) { // stop the game and show the result
           if (lifeToGameOver <= 0) {
                     hideSection('play-ground');
                     addSection('score-screen');
@@ -46,28 +47,24 @@ function stopGame(lifeToGameOver) {
           }
 }
 
-function resetEveryThing() {
+function resetEveryThing() { // reset everything
           score = 0;
           showScore.innerText = score;
           errorTextShow.innerText = '';
-          life = 1;
+          life = 5;
           showLife.innerText = life;
 }
 
-document.addEventListener('keydown', (e) => {
-          const pressedKey = document.querySelector('.' + e.key);
-          const lowerCase = showAlphabet.innerText.toLowerCase();
-          try {
-                    pressedKey.classList.add('bg-yellow-400');
-                    setTimeout(() => {
-                              pressedKey.classList.remove('bg-yellow-400')
-                    }, 200)
-                    if (pressedKey.id === lowerCase) {
+function showBg (alphabet) { // random alphabet's bg
+          const bg = document.querySelector('.' + alphabet);
+          bg.classList.add('bg-yellow-400');
+}
+
+function gameFuntionality (pressedKey, lowerCaseAlphapet) { // game funtionality
+                    if (pressedKey.id === lowerCaseAlphapet) {
                               score++;
-                              life++;
                               startGame();
                               showScore.innerText = score;
-                              showLife.innerText = life;
                               errorTextShow.innerText = '';
                     } else {
                               errorTextShow.innerText = "Pressed wrong key";
@@ -75,6 +72,26 @@ document.addEventListener('keydown', (e) => {
                               showLife.innerText = life;
                               stopGame(life);
                     }
+}
+
+function quitTheGame(pressedKey) {
+          if (pressedKey === 'Escape') {
+                    hideSection('play-ground');
+                    addSection('score-screen');
+                    mainScore.innerText = score;
+          }
+}
+
+document.addEventListener('keydown', (e) => { // getting the pressed key
+          const pressedKey = document.querySelector('.' + e.key); //Pressed key
+          const lowerCase = showAlphabet.innerText.toLowerCase(); // Random key
+          quitTheGame(e.key);
+          try {
+                    pressedKey.classList.add('bg-yellow-400');
+                    setTimeout(() => {
+                              pressedKey.classList.remove('bg-yellow-400')
+                    }, 200)
+                    gameFuntionality(pressedKey, lowerCase);
           } catch (err) {
                     errorTextShow.innerText = "Press Alphabets Only";
           }
