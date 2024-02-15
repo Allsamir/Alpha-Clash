@@ -1,11 +1,106 @@
  <!DOCTYPE html>
  <html lang="en">
+
  <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Alphabet Clash</title>
+           <meta charset="UTF-8">
+           <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+           <title>Alphabet Clash</title>
+           <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/8566/8566057.png" type="image/x-icon">
+
+           <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+           <script src="https://cdn.tailwindcss.com"></script>
+           <link rel="stylesheet" href="./css/styles.css">
  </head>
+
  <body>
-          
+           <main class="bg-mainBg min-h-screen bg-[url(./images/background.png)] bg-no-repeat bg-center">
+                     <!-- home screen -->
+                     <section
+                               class="home min-h-screen text-white text-center flex flex-col justify-center items-center" id="home">
+                               <h1 class="font-anton text-[10rem]">ALPHABET CLASH</h1>
+                               <p class="font-popins font-medium text-2xl mb-8">Unleash Your Keyboard Kung Fu : Press
+                                         “Enter” to Play</p>
+                               <button
+                                         class="btn border-none bg-white text-mainBg hover:text-white font-popins font-semibold text-2xl" id="play-btn" onclick="hideSection('home'); addSection('play-ground');startGame()">Play
+                                         Now</button>
+                     </section>
+                     <!-- play screen -->
+                     <section class="play hidden" id="play-ground">
+                               <div class="text-center pt-8">
+                                         <div class="play-ground-screen flex justify-center items-center">
+                                                   <div
+                                                             class="artboard artboard-horizontal phone-6 border-borderColor border-solid border-[20px] rounded-2xl bg-playBg">
+                                                             <div class="bg-borderColor w-96 text-center h-8 rounded-b-xl bg-[#2F2941] mx-auto">
+                                                                      <p class="font-popins font-medium text-base text-white">Don't watch keyboard  while playing...</p>
+                                                             </div>
+                                                             <p class="text-black font-popins font-semibold text-[8rem] text-center" id="show-alphabet">Y</p>
+
+                                                   </div>
+                                         </div>
+                                         <p id="error-text" class="my-4"></p>
+                                         <div class="keybord mb-16 text-2xl">
+                                                   <div class="flex justify-center gap-1 my-1 w-full">
+                                                             <kbd id="q" class="kbd q bg-white text-black">q</kbd>
+                                                             <kbd id="w" class="kbd w bg-white text-black">w</kbd>
+                                                             <kbd id="e" class="kbd e bg-white text-black">e</kbd>
+                                                             <kbd id="r" class="kbd r bg-white text-black">r</kbd>
+                                                             <kbd id="t" class="kbd t bg-white text-black">t</kbd>
+                                                             <kbd id="y" class="kbd y bg-white text-black">y</kbd>
+                                                             <kbd id="u" class="kbd u bg-white text-black">u</kbd>
+                                                             <kbd id="i" class="kbd i bg-white text-black">i</kbd>
+                                                             <kbd id="o" class="kbd o bg-white text-black">o</kbd>
+                                                             <kbd id="p" class="kbd p bg-white text-black">p</kbd>
+                                                   </div>
+                                                   <div class="flex justify-center gap-1 my-1 w-full">
+                                                             <kbd id="a" class="kbd a bg-white text-black">a</kbd>
+                                                             <kbd id="s" class="kbd s bg-white text-black">s</kbd>
+                                                             <kbd id="d" class="kbd d bg-white text-black">d</kbd>
+                                                             <kbd id="f" class="kbd f bg-white text-black">f</kbd>
+                                                             <kbd id="g" class="kbd g bg-white text-black">g</kbd>
+                                                             <kbd id="h" class="kbd h bg-white text-black">h</kbd>
+                                                             <kbd id="j" class="kbd j bg-white text-black">j</kbd>
+                                                             <kbd id="k" class="kbd k bg-white text-black">k</kbd>
+                                                             <kbd id="l" class="kbd l bg-white text-black">l</kbd>
+                                                   </div>
+                                                   <div class="flex justify-center gap-1 my-1 w-full">
+                                                             <kbd id="z" class="kbd z bg-white text-black">z</kbd>
+                                                             <kbd id="x" class="kbd x bg-white text-black">x</kbd>
+                                                             <kbd id="c" class="kbd c bg-white text-black">c</kbd>
+                                                             <kbd id="v" class="kbd v bg-white text-black">v</kbd>
+                                                             <kbd id="b" class="kbd b bg-white text-black">b</kbd>
+                                                             <kbd id="n" class="kbd n bg-white text-black">n</kbd>
+                                                             <kbd id="m" class="kbd m bg-white text-black">m</kbd>
+                                                             <kbd id="/" class="kbd / bg-white text-black">/</kbd>
+                                                   </div>
+                                         </div>
+                                         <div class="live-score flex justify-between max-w-[1100px] mx-auto">
+
+                                                  <button class="btn bg-purple-400 text-white rounded-full">
+                                                                     Life
+                                                                     <img src="./images/heart.svg" alt="">
+                                                                     <span id="life">1</span>
+                                                  </button>
+                                                  <button class="btn bg-purple-800 text-white rounded-full">
+                                                  Score
+                                                  <img src="./images/dollar.svg" alt="">
+                                                  <span id="score">0</span>
+                                                  </button>
+                                         </div>
+                               </div>
+                     </section>
+                     <!-- score screen -->
+                     <section class="score hidden text-white flex flex-col justify-center items-center min-h-screen" id="score-screen">
+                              <div class="bg-gradient-to-r from-gradiantColor1 from-0% to-gradiantColor2 to-100% ... w-96 border-scoreBorder border border-solid rounded-2xl p-10 space-y-4 text-center">
+                                        <h1 class="font-popins text-6xl"><span class="font-extrabold">Score</span> <span class="font-extrabold">:</span> <span class="font-extrabold" id="main-score">0</span></h1>
+                                    <button
+                                         class="btn border-none bg-white text-mainBg hover:text-white font-popins font-semibold text-2xl" onclick="hideSection('score-screen');addSection('play-ground'); resetEveryThing()">Play
+                                         Again</button>
+                                         <p class="font-medium text-2xl">Practice will make you Pro</p>    
+                              </div>
+                     </section>
+           </main>
+           <script src="./js/index.js"></script>
  </body>
+
  </html>
