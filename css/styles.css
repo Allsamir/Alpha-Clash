@@ -10,3 +10,6 @@ html {
 .font-anton {
   font-family: "Anton", sans-serif;
 }
+.bg-red {
+  background-color: red !important;
+}

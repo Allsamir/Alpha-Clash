@@ -66,12 +66,29 @@ function gameFuntionality (pressedKey, lowerCaseAlphapet) { // game funtionality
                               startGame();
                               showScore.innerText = score;
                               errorTextShow.innerText = '';
+                              audioPlay('success');
                     } else {
                               errorTextShow.innerText = "Pressed wrong key";
                               life--;
                               showLife.innerText = life;
                               stopGame(life);
+                              audioPlay('wrong');
                     }
+}
+
+
+function audioPlay(audio) {
+          if (audio === 'success') {
+                    const newAudio = new Audio('../../audio/success_bell-6776.mp3');
+                    newAudio.play();
+          } else {
+                    const newAudio = new Audio('../../audio/wrong-buzzer-6268.mp3');
+                    newAudio.play();
+                    document.getElementById('play-ground').classList.add('bg-red');
+                    setTimeout(() => {
+                           document.getElementById('play-ground').classList.remove('bg-red');   
+                    }, 200)
+          }
 }
 
 function quitTheGame(pressedKey) {
@@ -94,5 +111,6 @@ document.addEventListener('keydown', (e) => { // getting the pressed key
                     gameFuntionality(pressedKey, lowerCase);
           } catch (err) {
                     errorTextShow.innerText = "Press Alphabets Only";
+                    audioPlay('wrong');
           }
 })
