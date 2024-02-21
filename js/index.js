@@ -19,7 +19,12 @@ const showScore = document.getElementById('score');
 const errorTextShow = document.getElementById('error-text');
 const showLife = document.getElementById('life')
 let life = 5;
-const mainScore = document.getElementById('main-score')
+const mainScore = document.getElementById('main-score');
+const playButton = document.getElementById('play-btn');
+let isGameOver = false;
+const displayKeys = document.getElementById('display-key');
+let colorChange = 0;
+const showModal = document.getElementById('my_modal_2');
 
 function hideSection(element) { // dynamic add hidden class
           const home = document.getElementById(element)
@@ -44,6 +49,7 @@ function stopGame(lifeToGameOver) { // stop the game and show the result
                     hideSection('play-ground');
                     addSection('score-screen');
                     mainScore.innerText = score;
+                    isGameOver = true;
           }
 }
 
@@ -53,6 +59,9 @@ function resetEveryThing() { // reset everything
           errorTextShow.innerText = '';
           life = 5;
           showLife.innerText = life;
+          isGameOver = false;
+          colorChange = 0;
+          displayKeys.style.background = ` rgba(255, 255, 255, 0.70)`;
 }
 
 function showBg (alphabet) { // random alphabet's bg
@@ -71,8 +80,14 @@ function gameFuntionality (pressedKey, lowerCaseAlphapet) { // game funtionality
                               errorTextShow.innerText = "Pressed wrong key";
                               life--;
                               showLife.innerText = life;
+                              if (isGameOver === true) {
+                                   return
+                              } else {
+                                   audioPlay('wrong');
+                              }
                               stopGame(life);
-                              audioPlay('wrong');
+                              colorChange = colorChange + 20;
+                              displayKeys.style.background = `linear-gradient(0deg, red ${colorChange}%, rgba(255, 255, 255, 0.70) 100%)`;
                     }
 }
 
@@ -99,7 +114,9 @@ function quitTheGame(pressedKey) {
           }
 }
 
-document.addEventListener('keydown', (e) => { // getting the pressed key
+playButton.addEventListener('click', () => {
+
+       document.addEventListener('keydown', (e) => { // getting the pressed key
           const pressedKey = document.querySelector('.' + e.key); //Pressed key
           const lowerCase = showAlphabet.innerText.toLowerCase(); // Random key
           quitTheGame(e.key);
@@ -113,4 +130,11 @@ document.addEventListener('keydown', (e) => { // getting the pressed key
                     errorTextShow.innerText = "Press Alphabets Only";
                     audioPlay('wrong');
           }
+       })
 })
+
+document.body.addEventListener('mousemove', (e) => {
+       if (e.clientY <= 20) {
+              showModal.showModal()
+       }
+ })

@@ -25,11 +25,20 @@
                                          class="btn border-none bg-white text-mainBg hover:text-white font-popins font-semibold text-2xl" id="play-btn" onclick="hideSection('home'); addSection('play-ground');startGame()">Play
                                          Now</button>
                      </section>
+<dialog id="my_modal_2" class="modal text-white">
+  <div class="modal-box bg-[#7010EB]">
+    <h3 class="font-bold text-lg">Are you sure to quit the game ?</h3>
+    <p class="py-4">Press ESC to quit</p>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
                      <!-- play screen -->
                      <section class="play hidden" id="play-ground">
                                <div class="text-center pt-8">
                                          <div class="play-ground-screen flex justify-center items-center">
-                                                   <div
+                                                   <div id="display-key"
                                                              class="artboard artboard-horizontal phone-6 border-borderColor border-solid border-[20px] rounded-2xl bg-playBg">
                                                              <div class="bg-borderColor w-96 text-center h-8 rounded-b-xl bg-[#2F2941] mx-auto">
                                                                       <p class="font-popins font-medium text-base text-white">Don't watch keyboard  while playing...</p>
