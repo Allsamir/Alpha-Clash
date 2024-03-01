@@ -111,6 +111,7 @@ function quitTheGame(pressedKey) {
               hideSection('play-ground');
               addSection('score-screen');
               mainScore.innerText = score;
+              isGameOver = true;
        }
 }
 
